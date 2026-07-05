@@ -23,5 +23,18 @@ management:
         health:
             show-details: always
 
+springdoc:
+    swagger-ui:
+      path: /swagger-ui.html
+      display-request-duration: true
+      operations-sorter: method
+
+    api-docs:
+      path: /api-docs
+
+    packages-to-scan: com.finverse.discovery
+
+
+    paths-to-match: /**
 
 
