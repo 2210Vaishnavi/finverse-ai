@@ -11,11 +11,10 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 @SpringBootApplication
 public class DiscoveryServiceApplication {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DiscoveryServiceApplication.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(DiscoveryServiceApplication.class);
 
-	public static void main(String[] args) {
-		SpringApplication.run(DiscoveryServiceApplication.class, args);
-        LOGGER.info(LogMessages.APPLICATION_STARTED);
-	}
-
+  public static void main(String[] args) {
+    SpringApplication.run(DiscoveryServiceApplication.class, args);
+    LOGGER.info(LogMessages.APPLICATION_STARTED);
+  }
 }
