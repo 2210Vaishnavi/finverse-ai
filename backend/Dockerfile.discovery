@@ -1,37 +1,30 @@
-###############################
-# Runtime
-###############################
+# ===========================
+# Stage 1 : Build
+# ===========================
+FROM maven:3.9.9-eclipse-temurin-21 AS builder
+
+WORKDIR /workspace
+
+COPY . .
+
+RUN mvn clean package \
+    -pl services/discovery-service \
+    -am \
+    -DskipTests
+
+# ===========================
+# Stage 2 : Runtime
+# ===========================
 FROM eclipse-temurin:21-jre
 
 LABEL maintainer="Vaishnavi K"
 LABEL application="FinVerse AI"
 LABEL service="Discovery Service"
-LABEL version="0.1.0"
-
-# Create non-root user
-RUN addgroup --system spring && \
-    adduser --system spring --ingroup spring
 
 WORKDIR /app
 
-COPY --from=builder \
-/workspace/services/discovery-service/target/discovery-service-0.0.1-SNAPSHOT.jar \
-app.jar
-
-RUN chown spring:spring app.jar
-
-USER spring
+COPY --from=builder /workspace/services/discovery-service/target/discovery-service-0.0.1-SNAPSHOT.jar app.jar
 
 EXPOSE 8761
 
-HEALTHCHECK \
---interval=30s \
---timeout=5s \
-CMD wget --no-verbose --tries=1 \
---spider http://localhost:8761/actuator/health || exit 1
-
-ENTRYPOINT ["java",
-"-XX:+UseContainerSupport",
-"-XX:MaxRAMPercentage=75",
-"-jar",
-"app.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]

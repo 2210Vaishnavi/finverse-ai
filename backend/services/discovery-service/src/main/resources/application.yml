@@ -26,7 +26,6 @@ management:
             probes:
                 enabled: true
 
-
     health:
         livenessstate:
             enabled: true
@@ -44,7 +43,6 @@ springdoc:
       path: /api-docs
 
     packages-to-scan: com.finverse.discovery
-
 
     paths-to-match: /**
 
