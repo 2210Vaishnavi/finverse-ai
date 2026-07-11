@@ -17,11 +17,33 @@ management:
     endpoints:
         web:
             exposure:
-                include: health,info,metrics
+                include: health,info,metrics,prometheus
 
     endpoint:
         health:
             show-details: always
 
+            probes:
+                enabled: true
+
+    health:
+        livenessstate:
+            enabled: true
+
+        readinessstate:
+            enabled: true
+
+springdoc:
+    swagger-ui:
+      path: /swagger-ui.html
+      display-request-duration: true
+      operations-sorter: method
+
+    api-docs:
+      path: /api-docs
+
+    packages-to-scan: com.finverse.discovery
+
+    paths-to-match: /**
 
 
