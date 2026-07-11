@@ -20,6 +20,7 @@
         <!-- Infrastructure -->
         <!-- Will be added gradually -->
         <module>services/discovery-service</module>
+        <module>shared-library/common-exception</module>
     </modules>
 
     <properties>
